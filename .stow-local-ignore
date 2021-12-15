@@ -1,0 +1,7 @@
+\.git
+^/README.*
+^/LICENSE.*
+^/COPYING
+ghc.sh
+.*stow_up.sh
+
