@@ -3,5 +3,5 @@
 ^/LICENSE.*
 ^/COPYING
 ghc.sh
-.*stow_up.sh
-
+\.bin/.*stow_up.sh
+\.gitconfig
