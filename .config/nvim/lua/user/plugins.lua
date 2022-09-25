@@ -35,6 +35,7 @@ packer.init({
 		open_fn = function()
 			return require("packer.util").float({ border = "rounded" })
 		end,
+		prompt_border = "rounded", -- Border style of prompt popups.
 	},
 })
 
@@ -42,41 +43,74 @@ packer.init({
 return packer.startup(function(use)
 	-- My plugins here
 	use("wbthomason/packer.nvim") -- Have packer manage itself
-	use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
+	-- Lua Development
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
-	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
-	use("numToStr/Comment.nvim") -- Easily comment stuff
+	use("nvim-lua/popup.nvim")
+	use("christianchiarulli/lua-dev.nvim")
+
+	--Icon
 	use("kyazdani42/nvim-web-devicons")
-	use("akinsho/bufferline.nvim")
+	--	use("akinsho/bufferline.nvim")
+	-- Utility
 	use("moll/vim-bbye")
-	use("nvim-lualine/lualine.nvim")
-	use("akinsho/toggleterm.nvim")
-	use("ahmedkhalf/project.nvim")
 	use("lewis6991/impatient.nvim")
-	use("lukas-reineke/indent-blankline.nvim")
+	use("ghillb/cybu.nvim")
+
+	-- StatusLine
+	use("nvim-lualine/lualine.nvim")
+
+	-- Comment
+	use("folke/todo-comments.nvim")
+	use("numToStr/Comment.nvim") -- Easily comment stuff
+
+	-- Terminal
+	use("akinsho/toggleterm.nvim")
+
+	-- Session
+	use("rmagatti/auto-session")
+	use("rmagatti/session-lens")
+
+	-- Startup
 	use("goolord/alpha-nvim")
+
+	-- Color
+	use("NvChad/nvim-colorizer.lua")
+	use("nvim-colortils/colortils.nvim")
+
+	-- Indent
+	use("lukas-reineke/indent-blankline.nvim")
+
+	--Project
+	use("ahmedkhalf/project.nvim")
+	use("windwp/nvim-spectre")
 	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
 	use("folke/which-key.nvim")
-	use("karb94/neoscroll.nvim")
 	use("ur4ltz/surround.nvim")
 	use("Shatur/neovim-session-manager")
-	use("folke/zen-mode.nvim")
-	use("folke/todo-comments.nvim")
-	use("norcalli/nvim-colorizer.lua")
 	use("rcarriga/nvim-notify")
 	--	use("SmiteshP/nvim-gps")
 	use({ "christianchiarulli/nvim-gps", branch = "text_hl" })
 	--use("matbme/JABS.nvim")
 	use({ "christianchiarulli/JABS.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
 	use("unblevable/quick-scope")
-	use("tversteeg/registers.nvim")
+
+	-- Editing Support
+	use("folke/zen-mode.nvim")
+	use("monaqa/dial.nvim")
+	use("windwp/nvim-autopairs")
+	use("nacro90/numb.nvim")
+	use("andymass/vim-matchup")
+	use("karb94/neoscroll.nvim")
+	use("junegunn/vim-slash")
+
+	-- Code Runner
+	use("is0n/jaq-nvim")
+
+	-- Quickfix
 	use("kevinhwang91/nvim-bqf")
-	use({
-		"ghillb/cybu.nvim",
-		branch = "v1.x", -- won't receive breaking changes
-		-- branch = "main", -- timely updates
-		requires = { "kyazdani42/nvim-web-devicons" }, --optional
-	})
+
+	-- Registers
+	use("tversteeg/registers.nvim")
 
 	-- File explorer
 	use("tamago324/lir.nvim")
@@ -110,23 +144,31 @@ return packer.startup(function(use)
 	use("L3MON4D3/LuaSnip") --snippet engine
 	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 	use("filipdutescu/renamer.nvim")
-	use("simrat39/symbols-outline.nvim")
 	use({ "michaelb/sniprun", run = "bash ./install.sh" })
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- enable LSP
-	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
-	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
+	use("williamboman/mason.nvim") -- lsp installer
+	use("williamboman/mason-lspconfig.nvim")
+	--	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	use("ray-x/lsp_signature.nvim")
 	use({ "ShinKage/idris2-nvim", requires = { "neovim/nvim-lspconfig", "MunifTanjim/nui.nvim" } })
+	use("lvimuser/lsp-inlayhints.nvim")
+	use("simrat39/symbols-outline.nvim")
+	use("j-hui/fidget.nvim")
+	use("https://git.sr.ht/~whynothugo/lsp_lines.nvim")
+	use("SmiteshP/nvim-navic")
+	use("RRethy/vim-illuminate")
 
-	-- Telescope
+	-- Fuzzy Finder/Telescope
 	use("nvim-telescope/telescope.nvim")
+	use("nvim-telescope/telescope-media-files.nvim")
 	use({
 		"folke/trouble.nvim",
 		cmd = "TroubleToggle",
 	})
+
 	-- Treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -135,16 +177,27 @@ return packer.startup(function(use)
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use("ChristianChiarulli/nvim-ts-rainbow")
 	use("nvim-treesitter/playground")
+	use("nvim-treesitter/nvim-treesitter-textobjects")
+	use("kylechui/nvim-surround")
+	use({
+		"abecodes/tabout.nvim",
+		wants = { "nvim-treesitter" }, -- or require if not used so far
+	})
+
+  --Marks
+  use "christianchiarulli/harpoon"
 
 	-- Git
 	use("lewis6991/gitsigns.nvim")
+	use("f-person/git-blame.nvim")
 
 	-- Debug
 	use("mfussenegger/nvim-dap")
-	--	use("leoluz/nvim-dap-go")
-	use("theHamsta/nvim-dap-virtual-text")
 	use("rcarriga/nvim-dap-ui")
-	use("Pocco81/DAPInstall.nvim")
+
+	-- Rust
+	use("Saecki/crates.nvim")
+	use({ "christianchiarulli/rust-tools.nvim", branch = "modularize_and_inlay_rewrite" })
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

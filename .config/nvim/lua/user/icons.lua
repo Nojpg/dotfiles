@@ -1,4 +1,5 @@
-if vim.fn.has("mac") == 1 then
+vim.g.use_nerd_icons = false
+if vim.fn.has("mac") == 1 or vim.g.use_nerd_icons then
 	-- elseif vim.fn.has "mac" == 1 then
 	return {
 		kind = {
@@ -56,8 +57,11 @@ if vim.fn.has("mac") == 1 then
 			Rename = "",
 			Diff = "",
 			Repo = "",
+			Octoface = "",
 		},
 		ui = {
+			ArrowClosed = "",
+			ArrowOpen = "",
 			Lock = "",
 			Circle = "",
 			BigCircle = "",
@@ -77,6 +81,7 @@ if vim.fn.has("mac") == 1 then
 			Package = "",
 			List = "",
 			SignIn = "",
+			SignOut = "",
 			Check = "",
 			Fire = "",
 			Note = "",
@@ -86,6 +91,7 @@ if vim.fn.has("mac") == 1 then
 			ChevronRight = ">",
 			Table = "",
 			Calendar = "",
+			CloudDownload = "",
 		},
 		diagnostics = {
 			Error = "",
@@ -99,6 +105,9 @@ if vim.fn.has("mac") == 1 then
 			Squirrel = "",
 			Tag = "",
 			Watch = "",
+			Smiley = "ﲃ",
+			Package = "",
+			CircuitBoard = "",
 		},
 	}
 else
@@ -153,8 +162,11 @@ else
 			Rename = " ",
 			Diff = " ",
 			Repo = " ",
+			Octoface = " ",
 		},
 		ui = {
+			ArrowClosed = "",
+			ArrowOpen = "",
 			Lock = " ",
 			Circle = " ",
 			BigCircle = " ",
@@ -174,6 +186,8 @@ else
 			Package = " ",
 			List = " ",
 			SignIn = " ",
+			SignOut = " ",
+			NoteBook = " ",
 			Check = " ",
 			Fire = " ",
 			Note = " ",
@@ -182,6 +196,7 @@ else
 			ChevronRight = "",
 			Table = " ",
 			Calendar = " ",
+			CloudDownload = " ",
 		},
 		diagnostics = {
 			Error = " ",
@@ -195,6 +210,9 @@ else
 			Squirrel = " ",
 			Tag = " ",
 			Watch = " ",
+			Smiley = " ",
+			Package = " ",
+			CircuitBoard = " ",
 		},
 	}
 end

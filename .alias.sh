@@ -1,4 +1,4 @@
-
+alias vim="CC=gcc-12 ~/nvim-linux64/bin/nvim"
 alias ls="exa --icons"
 alias diff="delta -s"
 alias mv="mv -v"

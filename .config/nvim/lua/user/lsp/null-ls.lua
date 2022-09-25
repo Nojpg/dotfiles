@@ -8,46 +8,51 @@ local formatting = null_ls.builtins.formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
 
-local code_actions = null_ls.builtins.code_actions
-
-local hover = null_ls.builtins.hover
-local diagnostics_code_template = "[#{c}] #{m} (#{s})"
-
+-- https://github.com/prettier-solidity/prettier-plugin-solidity
+-- npm install --save-dev prettier prettier-plugin-solidity
 null_ls.setup({
 	debug = false,
 	sources = {
-		formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
+		formatting.prettier.with({
+			extra_filetypes = { "toml", "solidity" },
+			extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+		}),
 		formatting.black.with({ extra_args = { "--fast" } }),
 		formatting.stylua,
-		-- .with({
-		--   condition = with_root_file(".stylua.toml"),
-		-- }),
-		formatting.autopep8,
-		formatting.cmake_format,
-		formatting.gofmt,
-		formatting.shellharden,
 		formatting.shfmt,
-		formatting.rustfmt,
-		formatting.asmfmt,
-		code_actions.shellcheck,
-		code_actions.gitsigns,
-		diagnostics.checkmake,
-		diagnostics.gitlint,
-		diagnostics.pylint,
-		diagnostics.luacheck,
-		diagnostics.shellcheck.with({
-			diagnostics_format = diagnostics_code_template,
-		}),
-		hover.dictionary,
+		formatting.google_java_format,
+    formatting.shellharden,
+		-- diagnostics.flake8,
+		diagnostics.shellcheck,
 	},
-	on_attach = function(client)
-		if client.resolved_capabilities.document_formatting then
-			vim.cmd([[ 
-      augroup LspFormatting 
-        autocmd! * <buffer>
-        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-      augroup END
-      ]])
-		end
-	end,
 })
+
+local unwrap = {
+	method = null_ls.methods.DIAGNOSTICS,
+	filetypes = { "rust" },
+	generator = {
+		fn = function(params)
+			local diagnostics = {}
+			-- sources have access to a params object
+			-- containing info about the current file and editor state
+			for i, line in ipairs(params.content) do
+				local col, end_col = line:find("unwrap()")
+				if col and end_col then
+					-- null-ls fills in undefined positions
+					-- and converts source diagnostics into the required format
+					table.insert(diagnostics, {
+						row = i,
+						col = col,
+						end_col = end_col,
+						source = "unwrap",
+						message = "hey " .. os.getenv("USER") .. ", don't forget to handle this",
+						severity = 2,
+					})
+				end
+			end
+			return diagnostics
+		end,
+	},
+}
+
+null_ls.register(unwrap)
