@@ -9,8 +9,7 @@ if not status_ok_1 then
 end
 
 local servers = {
-  "jdtls",
---  "jsonls",
+  "jsonls",
   "sumneko_lua",
 --  "pyright",
 --  "yamlls",
@@ -18,6 +17,9 @@ local servers = {
   "gopls",
   "clangd",
   "rust_analyzer",
+  "hls",
+  "ocamllsp",
+  "jedi_language_server",
 }
 
 local settings = {
