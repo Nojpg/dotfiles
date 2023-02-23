@@ -18,10 +18,17 @@ font:
     family: "JetBrainsMono Nerd Font"
     style: Italic
   size: 14.0
-  use_thin_strokes: true
 
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
+
+key_bindings:
+  - { key: N, mods: Control, action: CreateNewWindow }
+  - { key: I, mods: Control, action: ToggleViMode }
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  save_to_clipboard: true 
 
 cursor:
   thickness: 0.20
