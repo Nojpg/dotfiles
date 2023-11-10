@@ -18,6 +18,7 @@ font:
     family: "JetBrainsMono Nerd Font"
     style: Italic
   size: 14.0
+  use_thin_strokes: true
 
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
@@ -25,6 +26,13 @@ mouse_bindings:
 key_bindings:
   - { key: N, mods: Control, action: CreateNewWindow }
   - { key: I, mods: Control, action: ToggleViMode }
+  - { key: Paste, action: Paste }
+  - { key: Copy, action: Copy }
+  - { key: Y, mode: Vi|~Search, action: Copy } 
+  - { key: V, mods: Control|Shift, mode: ~Vi, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy }
+  - { key: Insert, mods: Shift, action: PasteSelection }
+  - { key: F11, action: ToggleFullscreen }
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
