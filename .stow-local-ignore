@@ -2,6 +2,12 @@
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
-ghc.sh
-\.bin/.*stow_up.sh
+bin/.*stow_up.sh
 \.gitconfig
+ghc_install.sh
+cargo_install.sh
+cargo_tools.sh
+node_install.sh
+ocaml_install.sh
+python_install.sh
+shellcheck_install.sh
