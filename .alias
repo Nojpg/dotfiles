@@ -1,7 +1,0 @@
-alias vim="CC=gcc-12 ~/nvim-linux64/bin/nvim"
-alias nvim="CC=gcc-12 $HOME/.local/bin/nvim"
-alias ls="exa --icons"
-alias diff="delta -s"
-alias mv="mv -v"
-alias cp="cp -v"
-alias vimdiff="nvim -d"

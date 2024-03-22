@@ -1,0 +1,40 @@
+theme = "tokyonight"
+
+[editor]
+mouse = true
+middle-click-paste = true
+auto-completion = true
+auto-format = false
+auto-save = false
+completion-replace = false
+auto-info = true
+auto-pairs = true
+default-line-ending = "native"
+#bufferline = always ???
+
+[editor.statusline]
+mode.insert = "INSERT"
+mode.normal = "NORMAL"
+mode.select = "SELECT"
+separator = "|"
+center = ["file-name", "file-encoding", "version-control"]
+left = ["mode", "read-only-indicator", "file-modification-indicator", "spinner"]
+right = ["diagnostics", "selections", "file-type", "position"]
+
+[editor.lsp]
+enable = true
+auto-signature-help = true
+display-signature-help-docs = true
+snippets = true
+goto-reference-include-declaration = true
+
+[editor.file-picker]
+follow-symlinks = true
+deduplicate-links = true # mb change
+
+[keys.normal]
+g = { a = "code_action"}
+
+
+
+
