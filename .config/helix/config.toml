@@ -35,6 +35,12 @@ deduplicate-links = true # mb change
 [keys.normal]
 g = { a = "code_action"}
 
+[keys.normal.space]
+"y" = ":clipboard-yank-join"
+
+[keys.select.space]
+"y" = ":clipboard-yank-join"
+
 
 
 

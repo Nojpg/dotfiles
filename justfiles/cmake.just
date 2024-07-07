@@ -16,6 +16,7 @@ _cmake_gen b=BUILD_DIR g=GENERATOR_NAME s=SOURCE_PATH bt=BUILD_TYPE *extra_flags
      {{extra_flags}}
 
 [group('cmake-gen')]
+[group('default-folders')]
 cmake_default *extra_flags: (_cmake_gen BUILD_DIR GENERATOR_NAME SOURCE_PATH BUILD_TYPE extra_flags)
 
 [group('cmake-build')]
