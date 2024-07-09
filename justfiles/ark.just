@@ -10,17 +10,28 @@ ark_interop: (cmake_default HOST_CLANG_TOOLCHAIN INTEROP_FLAGS)
 [group('ohos')]
 [group('default-folders')]
 panda_bins: (ark_interop)
-    cmake --build BUILD_DIR --target panda_bins
+    cmake --build {{BUILD_DIR}} --target panda_bins
 
 [group('cmake-build')]
 [group('ohos')]
 [group('default-folders')]
 ets_interop_tests: (ark_interop)
-    cmake --build BUILD_DIR --target ets_interop_js_tests
+    cmake --build {{BUILD_DIR}} --target ets_interop_js_tests
 
 [group('cmake-build')]
 [group('ohos')]
 [group('default-folders')]
 ark_custom_target t: (ark_interop)
-    cmake --build BUILD_DIR --target {{t}}
+    cmake --build {{BUILD_DIR}} --target {{t}}
 
+[group('cmake-build')]
+[group('ohos')]
+[group('default-folders')]
+ets_interop_scenarios: (ark_interop)
+    cmake --build {{BUILD_DIR}} --target ets_interop_js_scenarios_js_to_ets
+
+[group('cmake-build')]
+[group('ohos')]
+[group('default-folders')]
+ets_interop_scenarios_dirty: 
+    cmake --build {{BUILD_DIR}} --target ets_interop_js_scenarios_js_to_ets

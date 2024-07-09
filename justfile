@@ -1,4 +1,4 @@
 default:
     just --list
 
-import 'justfiles/cmake.just'
+import '~/dotfiles/justfiles/cmake.just'
