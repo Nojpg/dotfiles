@@ -1,6 +1,4 @@
-INTEROP_FLAGS := "-DPANDA_ETS_INTEROP_JS=ON -DPANDA_WITH_TESTS=ON -DPANDA_WITH_BENCHMARKS=OFF \
-    -DPANDA_WITH_JAVA=OFF -DPANDA_WITH_TESTS_JAVA_ECMASCRIPT=OFF -DPANDA_WITH_CANJIE=OFF \
-    -DPANDA_WITH_HZ_ECMASCRIPT=OFF -DPANDA_WITH_ECMASCRIPT=OFF"
+INTEROP_FLAGS := "-DPANDA_ETS_INTEROP_JS=ON -DPANDA_WITH_TESTS=ON -DPANDA_WITH_BENCHMARKS=OFF"
 HOST_CLANG_TOOLCHAIN := "-DCMAKE_TOOLCHAIN_FILE=cmake/toolchain/host_clang_14.cmake"
 DEFAULT_ES2PANDA := '~/projects/arkcompiler_runtime_core/static_core/build/bin/es2panda'
 
@@ -8,6 +6,10 @@ DEFAULT_ES2PANDA := '~/projects/arkcompiler_runtime_core/static_core/build/bin/e
 [group('ohos')]
 [group('default-folders')]
 ark_interop: (cmake_default HOST_CLANG_TOOLCHAIN INTEROP_FLAGS)
+
+[group('cmake-gen')]
+[group('ohos')]
+ark_interop_in b: (cmake_in b HOST_CLANG_TOOLCHAIN INTEROP_FLAGS)
 
 [group('cmake-build')]
 [group('ohos')]
