@@ -14,8 +14,8 @@ ark_interop_in b: (cmake_in b HOST_CLANG_TOOLCHAIN INTEROP_FLAGS)
 [group('cmake-build')]
 [group('ohos')]
 [group('default-folders')]
-panda_bins: (ark_interop)
-    cmake --build {{BUILD_DIR}} --target panda_bins
+panda_bins b=BUILD_DIR: (ark_interop_in b)
+    cmake --build {{b}} --target panda_bins
 
 [group('cmake-build')]
 [group('ohos')]
