@@ -40,7 +40,13 @@ ets_interop_js_tests: (ark_interop)
 [group('cmake-build')]
 [group('ohos')]
 [group('default-folders')]
-ark_custom_target t: (ark_interop)
+ark_custom_target *t: (ark_interop)
+    cmake --build {{BUILD_DIR}} --target {{t}}
+
+[group('cmake-build')]
+[group('ohos')]
+[group('default-folders')]
+ark_custom_target_dirty *t:
     cmake --build {{BUILD_DIR}} --target {{t}}
 
 [group('cmake-build')]
