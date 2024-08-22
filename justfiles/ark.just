@@ -72,22 +72,22 @@ es2panda_playground_compile t f e2=DEFAULT_ES2PANDA:
 [group('default-folders')]
 [group('gdb')]
 es2panda_playground_debug t f e2=DEFAULT_ES2PANDA:    
-    lldb -- {{e2}} --opt-level=2 --thread=0 --extension=ets --arktsconfig={{t}}/arktsconfig.json --output={{t}}/main.abc {{t}}/{{f}}
-    #gdb --args {{e2}} --opt-level=2 --thread=0 --extension=ets --arktsconfig={{t}}/arktsconfig.json --output={{t}}/main.abc {{t}}/{{f}}
+    lldb -- {{e2}} --opt-level=2 --thread=0 --extension=sts --arktsconfig={{t}}/arktsconfig.json --output={{t}}/main.abc {{t}}/{{f}}
+    #gdb --args {{e2}} --opt-level=2 --thread=0 --extension=sts --arktsconfig={{t}}/arktsconfig.json --output={{t}}/main.abc {{t}}/{{f}}
 
 [group('ohos')]
 [group('default-folders')]
 [group('gdb')]
 es2panda_playground_debug2 t f f2 e2=DEFAULT_ES2PANDA:    
-    lldb -- {{e2}} --opt-level=2 --thread=0 --extension=ets --arktsconfig={{t}}/arktsconfig.json --output={{t}}/{{f2}}.abc {{t}}/{{f2}}
-    lldb -- {{e2}} --opt-level=2 --thread=0 --extension=ets --arktsconfig={{t}}/arktsconfig.json --output={{t}}/main.abc {{t}}/{{f}}
-    #gdb --args {{e2}} --opt-level=2 --thread=0 --extension=ets --arktsconfig={{t}}/arktsconfig.json --output={{t}}/main.abc {{t}}/{{f}}
+    lldb -- {{e2}} --opt-level=2 --thread=0 --extension=sts --arktsconfig={{t}}/arktsconfig.json --output={{t}}/{{f2}}.abc {{t}}/{{f2}}
+    lldb -- {{e2}} --opt-level=2 --thread=0 --extension=sts --arktsconfig={{t}}/arktsconfig.json --output={{t}}/main.abc {{t}}/{{f}}
+    #gdb --args {{e2}} --opt-level=2 --thread=0 --extension=sts --arktsconfig={{t}}/arktsconfig.json --output={{t}}/main.abc {{t}}/{{f}}
 
 [group('ohos')]
 [group('default-folders')]
 [group('run')]
 es2panda_playground_run folder file es2panda=DEFAULT_ES2PANDA:   
-    {{es2panda}} --opt-level=2 --thread=0 --extension=ets --arktsconfig={{folder}}/arktsconfig.json --output={{folder}}/main.abc {{folder}}/{{file}}
+    {{es2panda}} --opt-level=2 --thread=0 --extension=sts --arktsconfig={{folder}}/arktsconfig.json --output={{folder}}/main.abc {{folder}}/{{file}}
     #node {{folder}}/default_node.js
     lldb -- node {{folder}}/default_node.js
   
@@ -95,12 +95,12 @@ es2panda_playground_run folder file es2panda=DEFAULT_ES2PANDA:
 [group('default-folders')]
 [group('run')]
 es2panda_playground_run2 folder file file2 es2panda=DEFAULT_ES2PANDA:   
-    {{es2panda}} --opt-level=2 --thread=0 --extension=ets --arktsconfig={{folder}}/arktsconfig.json --output={{folder}}/{{file2}}.abc {{folder}}/{{file2}}
-    {{es2panda}} --opt-level=2 --thread=0 --extension=ets --arktsconfig={{folder}}/arktsconfig.json --output={{folder}}/main.abc {{folder}}/{{file}}
+    {{es2panda}} --opt-level=2 --thread=0 --extension=sts --arktsconfig={{folder}}/arktsconfig.json --output={{folder}}/{{file2}}.abc {{folder}}/{{file2}}
+    {{es2panda}} --opt-level=2 --thread=0 --extension=sts --arktsconfig={{folder}}/arktsconfig.json --output={{folder}}/main.abc {{folder}}/{{file}}
     #node {{folder}}/default_node.js
     lldb -- node {{folder}}/default_node.js
 
 [group('ohos')]
 [group('default-folders')]
 es2panda_playground_dump t f e2=DEFAULT_ES2PANDA:    
-    {{e2}} --opt-level=2 --dump-ast --thread=0 --extension=ets --arktsconfig={{t}}/arktsconfig.json --output={{t}}/main.abc {{t}}/{{f}}
+    {{e2}} --opt-level=2 --dump-ast --thread=0 --extension=sts --arktsconfig={{t}}/arktsconfig.json --output={{t}}/main.abc {{t}}/{{f}}

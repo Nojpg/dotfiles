@@ -13,6 +13,7 @@ _cmake_gen b=BUILD_DIR g=GENERATOR_NAME s=SOURCE_PATH bt=BUILD_TYPE *extra_flags
      generator {{g}}, sources {{s}} extra_flags {{extra_flags}}'
     cmake -G {{g}} -B {{b}} -S {{s}} -Werror=dev \
      -DCMAKE_BUILD_TYPE={{bt}} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+     -DCMAKE_CXX_FLAGS="-fno-limit-debug-info" \
      {{extra_flags}}
 
 [group('cmake-gen')]
