@@ -1,6 +1,7 @@
 INTEROP_FLAGS := "-DPANDA_ETS_INTEROP_JS=ON -DPANDA_WITH_TESTS=ON -DPANDA_WITH_BENCHMARKS=OFF"
 HOST_CLANG_TOOLCHAIN := "-DCMAKE_TOOLCHAIN_FILE=cmake/toolchain/host_clang_14.cmake"
 DEFAULT_ES2PANDA := '~/projects/arkcompiler_runtime_core/static_core/build/bin/es2panda'
+urunner := "tests/tests-u-runner/runner.sh"
 
 [group('cmake-gen')]
 [group('ohos')]
@@ -104,3 +105,15 @@ es2panda_playground_run2 folder file file2 es2panda=DEFAULT_ES2PANDA:
 [group('default-folders')]
 es2panda_playground_dump t f e2=DEFAULT_ES2PANDA:    
     {{e2}} --opt-level=2 --dump-ast --thread=0 --extension=sts --arktsconfig={{t}}/arktsconfig.json --output={{t}}/main.abc {{t}}/{{f}}
+
+[group('urunner')]
+[group('ohos')]
+[group('default-folders')]
+runner test_file b=BUILD_DIR:
+    {{urunner}} --work-dir={{b}}/groups --astchecker --processes=8 --build-dir={{b}} --verbose all --test-file {{test_file}}
+
+[group('ohos')]
+[group('default-folders')]
+[group('std-lib')]
+genlib b=BUILD_DIR:
+    bash plugins/ets/templates/stdlib/genlib.sh
