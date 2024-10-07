@@ -1,6 +1,6 @@
 INTEROP_FLAGS := "-DPANDA_ETS_INTEROP_JS=ON -DPANDA_WITH_TESTS=ON -DPANDA_WITH_BENCHMARKS=OFF"
 HOST_CLANG_TOOLCHAIN := "-DCMAKE_TOOLCHAIN_FILE=cmake/toolchain/host_clang_14.cmake"
-DEFAULT_ES2PANDA := '~/projects/arkcompiler_runtime_core/static_core/build/bin/es2panda'
+DEFAULT_ES2PANDA := '~/projects/panda/runtime_core/static_core/build/bin/es2panda'
 urunner := "tests/tests-u-runner/runner.sh"
 
 [group('cmake-gen')]
@@ -91,6 +91,7 @@ es2panda_playground_run folder file es2panda=DEFAULT_ES2PANDA:
     {{es2panda}} --opt-level=2 --thread=0 --extension=sts --arktsconfig={{folder}}/arktsconfig.json --output={{folder}}/main.abc {{folder}}/{{file}}
     #node {{folder}}/default_node.js
     lldb -- node {{folder}}/default_node.js
+    #gdb --args node {{folder}}/default_node.js
   
 [group('ohos')]
 [group('default-folders')]
