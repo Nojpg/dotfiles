@@ -1,21 +1,22 @@
 INTEROP_FLAGS := "-DPANDA_ETS_INTEROP_JS=ON -DPANDA_WITH_TESTS=ON -DPANDA_WITH_BENCHMARKS=OFF"
 HOST_CLANG_TOOLCHAIN := "-DCMAKE_TOOLCHAIN_FILE=cmake/toolchain/host_clang_14.cmake"
 DEFAULT_ES2PANDA := '~/projects/panda/runtime_core/static_core/build/bin/es2panda'
+LLVM_TARGET := '-DPANDA_LLVM_BACKEND=ON -DLLVM_TARGET_PATH=/home/nojpg/projects/panda/llvm_ark_build/llvm-15.0.4-ark99-beta9-debug-x86_64'
 urunner := "tests/tests-u-runner/runner.sh"
 
 [group('cmake-gen')]
 [group('ohos')]
 [group('default-folders')]
-ark_interop: (cmake_default HOST_CLANG_TOOLCHAIN INTEROP_FLAGS)
+ark_interop *f: (cmake_default HOST_CLANG_TOOLCHAIN INTEROP_FLAGS f)
 
 [group('cmake-gen')]
 [group('ohos')]
-ark_interop_in b: (cmake_in b HOST_CLANG_TOOLCHAIN INTEROP_FLAGS)
+ark_interop_in b *f: (cmake_in b HOST_CLANG_TOOLCHAIN INTEROP_FLAGS f)
 
 [group('cmake-build')]
 [group('ohos')]
 [group('default-folders')]
-panda_bins b=BUILD_DIR: (ark_interop_in b)
+panda_bins b=BUILD_DIR f='': (ark_interop_in b f)
     cmake --build {{b}} --target panda_bins ets_interop_js_napi
 
 [group('cmake-build')]
@@ -43,6 +44,10 @@ ets_interop_js_tests: (ark_interop)
 [group('default-folders')]
 ark_custom_target *t: (ark_interop)
     cmake --build {{BUILD_DIR}} --target {{t}}
+
+[group('ohos')]
+[group('default-folders')]
+ark_llvm_back: (panda_bins BUILD_DIR LLVM_TARGET)
 
 [group('cmake-build')]
 [group('ohos')]
