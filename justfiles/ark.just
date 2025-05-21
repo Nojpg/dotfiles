@@ -1,8 +1,9 @@
 INTEROP_FLAGS := "-DPANDA_ETS_INTEROP_JS=ON -DPANDA_WITH_TESTS=ON -DPANDA_WITH_BENCHMARKS=OFF"
 HOST_CLANG_TOOLCHAIN := "-DCMAKE_TOOLCHAIN_FILE=cmake/toolchain/host_clang_14.cmake"
 DEFAULT_ES2PANDA := '~/projects/panda/runtime_core/static_core/build/bin/es2panda'
-LLVM_TARGET := '-DPANDA_LLVM_BACKEND=ON -DLLVM_TARGET_PATH=/home/nojpg/projects/panda/llvm_ark_build/llvm-15.0.4-ark99-beta9-debug-x86_64'
+LLVM_TARGET := '-DPANDA_LLVM_BACKEND=ON -DLLVM_TARGET_PATH=/home/nojpg/projects/panda/llvm_install/llvm-15.0.4-ark18-debug-x86_64'
 urunner := "tests/tests-u-runner/runner.sh"
+CROSS_CLANG_MINGW_TOOLCHAIN := "-DCMAKE_TOOLCHAIN_FILE=cmake/toolchain/cross-clang-14-x86_64-w64-mingw32-static.cmake"
 
 [group('cmake-gen')]
 [group('ohos')]
@@ -17,13 +18,32 @@ ark_interop_in b *f: (cmake_in b HOST_CLANG_TOOLCHAIN INTEROP_FLAGS f)
 [group('ohos')]
 [group('default-folders')]
 panda_bins b=BUILD_DIR f='': (ark_interop_in b f)
-    cmake --build {{b}} --target panda_bins ets_interop_js_napi
+    hyperfine --runs 1 --show-output 'cmake --build {{b}} --target panda_bins ets_interop_js_napi ts_bindings'
+
+
+[group('cmake-build')]
+[group('ohos')]
+[group('default-folders')]
+check b=BUILD_DIR f='': (ark_interop_in b f)
+    cmake --build {{b}} --target cmake-checker test-cmake-checker clang-tidy-check code-style-check
+    
+[group('cmake-gen')]
+[group('ohos')]
+[group('default-folders')]
+ark_interop_win b *f: (cmake_in b CROSS_CLANG_MINGW_TOOLCHAIN f)
+
+[group('cmake-build')]
+[group('ohos')]
+[group('default-folders')]
+bindings_win b=BUILD_DIR f='': (ark_interop_win b f)
+    cmake --build {{b}} --target ts_bindings
+    
 
 [group('cmake-build')]
 [group('ohos')]
 [group('default-folders')]
 panda_bins_dirty b=BUILD_DIR:
-    cmake --build {{b}} --target panda_bins ets_interop_js_napi
+    hyperfine --runs 1 --show-output 'cmake --build {{b}} --target panda_bins ets_interop_js_napi ts_bindings'
 
 [group('cmake-build')]
 [group('ohos')]
