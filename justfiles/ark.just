@@ -18,8 +18,25 @@ ark_interop_in b *f: (cmake_in b HOST_CLANG_TOOLCHAIN INTEROP_FLAGS f)
 [group('ohos')]
 [group('default-folders')]
 panda_bins b=BUILD_DIR f='': (ark_interop_in b f)
-    hyperfine --runs 1 --show-output 'cmake --build {{b}} --target panda_bins ets_interop_js_napi ts_bindings'
+    hyperfine --runs 1 --show-output 'cmake --build {{b}} --target panda_bins ets_interop_js_napi ts_bindings etssdk'
 
+[group('default-folders')]
+[group('cmake-build')]
+[group('tests')]
+func_test b=BUILD_DIR f='': (panda_bins b f)
+    hyperfine --runs 1 --show-output 'bash tests/tests-u-runner/runner.sh --ets-func-tests --build-dir {{b}} --force-generate --processes $(nproc) --show-progress'
+
+[group('default-folders')]
+[group('cmake-build')]
+[group('tests')]
+sdk_test b=BUILD_DIR f='': (panda_bins b f)
+    hyperfine --runs 1 --show-output 'bash tests/tests-u-runner/runner.sh --ets-sdk --build-dir {{b}} --force-generate --processes $(nproc) --show-progress'
+
+[group('default-folders')]
+[group('cmake-build')]
+[group('tests')]
+sdk_test_dirty b=BUILD_DIR f='':
+    hyperfine --runs 1 --show-output 'bash tests/tests-u-runner/runner.sh --ets-sdk --build-dir {{b}} --force-generate --processes $(nproc) --show-progress'
 
 [group('cmake-build')]
 [group('ohos')]
