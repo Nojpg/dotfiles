@@ -23,14 +23,14 @@ panda_bins b=BUILD_DIR f='': (ark_interop_in b f)
 [group('default-folders')]
 [group('cmake-build')]
 [group('tests')]
-func_test b=BUILD_DIR f='': (panda_bins b f)
-    hyperfine --runs 1 --show-output 'bash tests/tests-u-runner/runner.sh --ets-func-tests --build-dir {{b}} --force-generate --processes $(nproc) --show-progress'
+func_test f='' b=BUILD_DIR: (panda_bins b f)
+    hyperfine --runs 1 --show-output 'bash tests/tests-u-runner/runner.sh --ets-func-tests --build-dir {{b}} --force-generate --processes $(nproc) --show-progress --filter={{f}}'
 
 [group('default-folders')]
 [group('cmake-build')]
 [group('tests')]
-func_test_dirty b=BUILD_DIR f='':
-    hyperfine --runs 1 --show-output 'bash tests/tests-u-runner/runner.sh --ets-func-tests --build-dir {{b}} --force-generate --processes $(nproc) --show-progress'
+func_test_dirty f='' b=BUILD_DIR :
+    hyperfine --runs 1 --show-output 'bash tests/tests-u-runner/runner.sh --ets-func-tests --build-dir {{b}} --force-generate --processes $(nproc) --show-progress --filter={{f}}'
 
 [group('default-folders')]
 [group('cmake-build')]
