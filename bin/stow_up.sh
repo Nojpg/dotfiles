@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Sync dotfiles repo and ensure that dotfiles are tangled correctly afterward
 
