@@ -24,7 +24,7 @@
     hunk-header-style = file line-number syntax
 
 [code]                                                                          
-    editor = nvim    
+    editor = hx    
 
 [diff]                                           
     tool = vimdiff                               

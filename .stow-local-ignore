@@ -11,3 +11,5 @@ node_install.sh
 ocaml_install.sh
 python_install.sh
 shellcheck_install.sh
+.ghc*
+shellcheck-stable
