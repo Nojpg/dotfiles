@@ -2,7 +2,7 @@ INTEROP_FLAGS := "-DPANDA_ETS_INTEROP_JS=ON -DPANDA_WITH_TESTS=ON -DPANDA_WITH_B
 HOST_CLANG_TOOLCHAIN := "-DCMAKE_TOOLCHAIN_FILE=cmake/toolchain/host_clang_14.cmake"
 DEFAULT_ES2PANDA := '~/projects/panda/runtime_core/static_core/build/bin/es2panda'
 LLVM_TARGET := '-DPANDA_LLVM_BACKEND=ON -DLLVM_TARGET_PATH=/home/nojpg/projects/panda/llvm_install/llvm-15.0.4-ark18-debug-x86_64'
-urunner := "tests/tests-u-runner/runner.sh"
+urunner := "tests/tests-u-runner-2/runner.sh"
 CROSS_CLANG_MINGW_TOOLCHAIN := "-DCMAKE_TOOLCHAIN_FILE=cmake/toolchain/cross-clang-14-x86_64-w64-mingw32-static.cmake"
 
 [group('cmake-gen')]
@@ -18,7 +18,7 @@ ark_interop_in b *f: (cmake_in b HOST_CLANG_TOOLCHAIN INTEROP_FLAGS f)
 [group('ohos')]
 [group('default-folders')]
 panda_bins b=BUILD_DIR f='': (ark_interop_in b f)
-    hyperfine --runs 1 --show-output 'cmake --build {{b}} --target panda_bins ets_interop_js_napi ts_bindings etssdk'
+    hyperfine --runs 1 --show-output 'cmake --build {{b}} --target panda_bins ets_interop_js_napi public etssdk'
 
 [group('default-folders')]
 [group('cmake-build')]
@@ -59,14 +59,14 @@ ark_interop_win b *f: (cmake_in b CROSS_CLANG_MINGW_TOOLCHAIN f)
 [group('ohos')]
 [group('default-folders')]
 bindings_win b=BUILD_DIR f='': (ark_interop_win b f)
-    cmake --build {{b}} --target ts_bindings
+    cmake --build {{b}} --target public
     
 
 [group('cmake-build')]
 [group('ohos')]
 [group('default-folders')]
 panda_bins_dirty b=BUILD_DIR:
-    hyperfine --runs 1 --show-output 'cmake --build {{b}} --target panda_bins ets_interop_js_napi ts_bindings'
+    hyperfine --runs 1 --show-output 'cmake --build {{b}} --target panda_bins ets_interop_js_napi public'
 
 [group('cmake-build')]
 [group('ohos')]
@@ -158,8 +158,8 @@ es2panda_playground_dump t f e2=DEFAULT_ES2PANDA:
 [group('urunner')]
 [group('ohos')]
 [group('default-folders')]
-runner test_file b=BUILD_DIR:
-    {{urunner}} --work-dir={{b}}/groups --astchecker --processes=8 --build-dir={{b}} --verbose all --test-file {{test_file}}
+runner_std filter:
+    bash {{urunner}} panda-int ets-func-tests --filter {{filter}} --force-generate --show-progress --processes=all --verbose=short
 
 [group('ohos')]
 [group('default-folders')]
